@@ -48,7 +48,7 @@ const unpack = require('tar-pack').unpack;
 const url = require('url');
 const hyperquest = require('hyperquest');
 const envinfo = require('envinfo');
-
+const copy = require('./copy')
 const packageJson = require('./package.json');
 
 let projectName;
@@ -109,7 +109,7 @@ const program = new commander.Command(packageJson.name)
 if (typeof projectName === 'undefined') {
   if (program.info) {
     envinfo.print({
-      packages: ['react', 'react-dom', 'react-scripts'],
+      packages: ['react', 'react-dom'],
       noNativeIDE: true,
       duplicates: true,
     });
@@ -175,6 +175,8 @@ function createApp(name, verbose, version, useNpm, template) {
     path.join(root, 'package.json'),
     JSON.stringify(packageJson, null, 2)
   );
+
+  copy(appName)
 
   const useYarn = useNpm ? false : shouldUseYarn();
   const originalDirectory = process.cwd();
@@ -544,7 +546,7 @@ function checkAppName(appName) {
   }
 
   // TODO: there should be a single place that holds the dependencies
-  const dependencies = ['react', 'react-dom', 'react-scripts'].sort();
+  const dependencies = ['react', 'react-dom'].sort();
   if (dependencies.indexOf(appName) >= 0) {
     console.error(
       chalk.red(
