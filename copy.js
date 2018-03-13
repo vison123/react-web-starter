@@ -23,10 +23,6 @@ module.exports = function(projectName) {
   const appPath = path.join(fs.realpathSync(process.cwd()), projectName);
   const folders = ['config', 'public', 'scripts', 'src'];
 
-  console.log('folders', folders)
-  console.log('ownPath', ownPath)
-  console.log('appPath', appPath)
-
   fs.copy(ownPath, appPath)
   // Make shallow array of files paths
   // const files = folders.reduce((files, folder) => {
