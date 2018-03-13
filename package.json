@@ -1,6 +1,6 @@
 {
   "name": "react-web-starter",
-  "version": "0.0.3",
+  "version": "0.0.7",
   "author": "vison",
   "keywords": [
     "react"
@@ -14,10 +14,6 @@
   "bugs": {
     "url": "https://github.com/vison123/react-web-starter/issues"
   },
-  "files": [
-    "index.js",
-    "createReactApp.js"
-  ],
   "bin": {
     "react-web-starter": "./index.js"
   },
