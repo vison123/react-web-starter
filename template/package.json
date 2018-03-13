@@ -11,9 +11,9 @@
     "react-scripts": "1.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "node start.js",
+    "build": "node build.js",
+    "test": "node test.js",
+    "eject": "node eject.js"
   }
 }

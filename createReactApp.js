@@ -166,15 +166,15 @@ function createApp(name, verbose, version, useNpm, template) {
   console.log(`Creating a new React app in ${chalk.green(root)}.`);
   console.log();
 
-  const packageJson = {
-    name: appName,
-    version: '0.1.0',
-    private: true,
-  };
-  fs.writeFileSync(
-    path.join(root, 'package.json'),
-    JSON.stringify(packageJson, null, 2)
-  );
+  // const packageJson = {
+  //   name: appName,
+  //   version: '0.1.0',
+  //   private: true,
+  // };
+  // fs.writeFileSync(
+  //   path.join(root, 'package.json'),
+  //   JSON.stringify(packageJson, null, 2)
+  // );
 
   copy(appName)
 
@@ -211,7 +211,7 @@ function createApp(name, verbose, version, useNpm, template) {
       version = 'react-scripts@0.9.x';
     }
   }
-  run(root, appName, version, verbose, originalDirectory, template, useYarn);
+  // run(root, appName, version, verbose, originalDirectory, template, useYarn);
 }
 
 function shouldUseYarn() {
