@@ -16,28 +16,42 @@ React Web template project scaffold
 
 ```
 my-app
-├── README.md
-├── node_modules
-├── package.json
-├── .gitignore
+├── config
+    └── jest
+    └── env.js
+    └── test.js
+    └── build.js
+    └── start.js
+    └── test.js
 ├── public
-│   └── favicon.ico
-│   └── index.html
-│   └── manifest.json
-└── src
-    └── App.css
-    └── App.js
-    └── App.test.js
-    └── index.css
-    └── index.js
-    └── logo.svg
-    └── registerServiceWorker.js
+    └── favicon.ico
+    └── index.html
+    └── manifest.json
+├── scripts
+    └── build.js
+    └── start.js
+    └── test.js
+├── src
+    └── app
+    └── assets
+    └── components
+    └── global
+    └── modules
+    └── utils
+├── .editorconfig
+├── .eslinttrc.js
+├── .gitignore
+├── .stylelintrc
+├── .gitignore
+├── package.json
+├── README.md
 ```
 
 ### start-up
 
 ```
     cd my-app
+    npm install
     npm start or yarn start
 ```
 

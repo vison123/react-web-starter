@@ -1,0 +1,43 @@
+@import "./common.less";
+@import "./table.less";
+
+#root {
+  width: 100%;
+  height: 100%;
+
+  .ant-menu-inline-collapsed {
+    a i {
+      margin-right: 26px;
+    }
+  }
+}
+
+.jc-province-modal {
+  display: block;
+
+  .ant-checkbox-wrapper {
+    margin: 6px;
+  }
+}
+
+.jc-modal-footer {
+  margin: 16px -16px 0;
+  border-top: 1px solid #E9E9E9;
+  padding: 16px 16px 0;
+  text-align: right;
+
+  button + button {
+    margin-left: 16px;
+  }
+}
+
+.promotion-oper {
+  a + a {
+    margin-left: 6px;
+  }
+}
+
+textarea[required]:invalid,
+textarea:focus:invalid {
+  box-shadow: none;
+}

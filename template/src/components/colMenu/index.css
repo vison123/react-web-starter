@@ -1,0 +1,11 @@
+.menuContainer {
+  max-width: 256px;
+  flex: 0 0 256px;
+  height: 100%;
+  position: relative;
+}
+
+.icon {
+  width: 14px;
+  margin-right: 10px;
+}

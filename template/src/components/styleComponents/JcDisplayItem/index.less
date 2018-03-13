@@ -1,0 +1,44 @@
+.jc-display-item-container {
+  display: flex;
+  margin-bottom: 0;
+
+  .ant-form-item-label {
+    width: 70px;
+    overflow: visible;
+  }
+
+  .ant-form-item-control-wrapper {
+    width: 100%;
+  }
+
+  .ant-checkbox-group {
+    padding-top: 10px;
+  }
+
+  .item-text {
+    padding-top: 10px;
+    flex: 1;
+    display: flex;
+    color: #000;
+    margin-left: 8px;
+    flex-direction: column;
+    > span {
+      line-height: 1.5;
+    }
+  }
+
+  .ant-form-extra {
+    font-size: 12px;
+  }
+
+  .ant-form-item-required::before {
+    content: "*";
+    position: absolute;
+    font-family: SimSun;
+    line-height: 1;
+    font-size: 12px;
+    color: #F5222D;
+    left: -8px;
+    top: 4px;
+  }
+}

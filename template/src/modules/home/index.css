@@ -1,0 +1,14 @@
+.col-card {
+  height: 276px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  padding: 30px 20px;
+}
+
+.shop-title {
+  font-family: PingFangSC-Medium;
+  font-size: 20px;
+  color: #000;
+  line-height: 20px;
+  margin: 25px 0;
+}

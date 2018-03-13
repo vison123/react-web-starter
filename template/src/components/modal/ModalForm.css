@@ -1,0 +1,23 @@
+.jc-modal-form {
+  .jc-modal-form-footer {
+    border-top: 1px solid #E9E9E9;
+    padding: 10px 16px 0 10px;
+    margin: 0 -16px;
+    text-align: right;
+    border-radius: 0 0 6px 6px;
+
+    button + button {
+      margin-left: 8px;
+      margin-bottom: 0;
+    }
+  }
+
+  .ant-form-item {
+    margin-bottom: 12px;
+  }
+
+  .ant-form-item-label {
+    text-align: right;
+    padding-right: 12px;
+  }
+}

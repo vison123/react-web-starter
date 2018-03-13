@@ -1,0 +1,18 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "rule-empty-line-before": ["always", {
+      "ignore": ["inside-block"],
+      "except": ["first-nested", "inside-block-and-after-rule"]
+    }],
+    "color-hex-case": "upper",
+    "max-nesting-depth": 4,
+    "no-empty-source": null,
+    "unit-no-unknown": [true, {
+      "ignoreUnits": ["rpx", "dpx"]
+    }],
+    "selector-pseudo-class-no-unknown": [true, {
+      "ignorePseudoClasses": ["global"]
+    }]
+  }
+}

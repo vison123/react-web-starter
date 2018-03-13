@@ -1,0 +1,32 @@
+.card-list {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  text-align: center;
+}
+
+.card-item {
+  padding: 15px 0 25px;
+}
+
+.card-item:not(:first-child) {
+  position: relative;
+}
+
+.card-item:not(:first-child)::before {
+  position: absolute;
+  content: '';
+  left: 0;
+  top: 50%;
+  margin-top: -24px;
+  width: 1px;
+  height: 48px;
+  background: rgba(0, 0, 0, 0.09);
+}
+
+.card-item p {
+  margin-bottom: 0;
+  line-height: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
