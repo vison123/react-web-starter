@@ -1,18 +1,50 @@
-.card-list {
+/* single-card-wrap */
+
+.wave-wrap {
+  position: relative;
+}
+
+.wave-wrap .wave {
+  position: absolute;
+  width: 100%;
+  bottom: -60px;
+  left: 0;
+}
+
+.single-card-wrap .card-item {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+}
+
+.single-card-wrap .card-item p {
+  margin-top: 35px;
+}
+
+.single-card-wrap .card-item h5 {
+  margin-bottom: 50px;
+}
+
+/* MultiCard */
+
+.multi-card-wrap {
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   text-align: center;
 }
 
-.card-item {
+.multi-card-wrap .card-item {
   padding: 15px 0 25px;
 }
 
-.card-item:not(:first-child) {
+.multi-card-wrap .card-item:not(:first-child) {
   position: relative;
 }
 
-.card-item:not(:first-child)::before {
+.multi-card-wrap .card-item:not(:first-child)::before {
   position: absolute;
   content: '';
   left: 0;
@@ -23,7 +55,7 @@
   background: rgba(0, 0, 0, 0.09);
 }
 
-.card-item p {
+.multi-card-wrap .card-item p {
   margin-bottom: 0;
   line-height: 2;
   overflow: hidden;

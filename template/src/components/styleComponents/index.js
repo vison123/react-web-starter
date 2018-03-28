@@ -1,19 +1,33 @@
+import React from 'react'
+import { Icon } from 'antd'
 import WhiteSpace from './WhiteSpace'
-import JcHeader from './JcHeader'
 import JcContent from './JcContent'
 import JcFilter from './JcFilter'
-import JcMutipleCard from './JcMutipleCard'
+import { SingleCard, MultiCard } from './JcMutipleCard'
 import JcDisplayItem from './JcDisplayItem'
 import JcOrderCard from './JcOrderCard'
 import JcDetailRowItem from './JcDetailRowItem'
+import JcMediaDisplay from './JcMediaDisplay'
+import JcCommoditySet from './JcCommoditySet'
+import JcExpandItem from './JcExpandItem'
+
+const UpLoadBtn = ({ type = 'picture' }) => (
+  <div>
+    <Icon type={type} style={{ fontSize: 36, color: '#E8E8E8' }} />
+  </div>
+)
 
 export {
   WhiteSpace,
-  JcHeader,
   JcContent,
   JcFilter,
-  JcMutipleCard,
+  SingleCard,
+  MultiCard,
   JcDisplayItem,
   JcOrderCard,
-  JcDetailRowItem
+  JcDetailRowItem,
+  JcMediaDisplay,
+  JcCommoditySet,
+  UpLoadBtn,
+  JcExpandItem
 }

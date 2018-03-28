@@ -1,18 +1,37 @@
 .jc-display-item-container {
   display: flex;
   margin-bottom: 0;
+  &.label-left {
+    .ant-form-item-label {
+      text-align: left;
+    }
+  }
+
+  &.label-right {
+    .ant-form-item-label {
+      text-align: right;
+    }
+  }
 
   .ant-form-item-label {
     width: 70px;
     overflow: visible;
+    flex: 1 0 70px;
+    label {
+      color: #595959;
+    }
   }
 
   .ant-form-item-control-wrapper {
     width: 100%;
+    .ant-form-item-children {
+      display: inline-block;
+      width: 100%;
+    }
   }
 
   .ant-checkbox-group {
-    padding-top: 10px;
+    padding-top: 9px;
   }
 
   .item-text {
@@ -40,5 +59,37 @@
     color: #F5222D;
     left: -8px;
     top: 4px;
+  }
+}
+
+.labelWidth5 {
+  .ant-form-item-label {
+    width: 84px;
+    overflow: visible;
+    flex: 1 0 84px;
+  }
+}
+
+.labelWidth6 {
+  .ant-form-item-label {
+    width: 98px;
+    overflow: visible;
+    flex: 1 0 98px;
+  }
+}
+
+.labelWidth7 {
+  .ant-form-item-label {
+    width: 108px;
+    overflow: visible;
+    flex: 1 0 108px;
+  }
+}
+
+.labelWidth8 {
+  .ant-form-item-label {
+    width: 120px;
+    overflow: visible;
+    flex: 1 0 120px;
   }
 }

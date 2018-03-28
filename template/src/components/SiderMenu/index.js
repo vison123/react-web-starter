@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
-import { Layout, Menu } from 'antd'
+import { Layout, Menu, Icon } from 'antd'
 import { Link } from 'react-router-dom'
-import styles from './index.css'
+import styles from './index.less'
 import storage from '../../utils/storage'
 
 const { Sider } = Layout
@@ -10,7 +10,7 @@ const { SubMenu } = Menu
 // Allow menu.js config icon as string or ReactNode
 //   icon: 'setting',
 //   icon: 'http://demo.com/icon.png',
-//   icon: <Icon type='setting' />,
+//   icon: <Icon type="setting" />,
 const getIcon = (icon) => {
   if (typeof icon === 'string' && icon.indexOf('http') === 0) {
     return (
@@ -22,12 +22,7 @@ const getIcon = (icon) => {
     )
   }
   if (typeof icon === 'string') {
-    return (
-      <span
-        className={`iconfont ${icon}`}
-        style={{ marginRight: '35px' }}
-      />
-    )
+    return <Icon type={icon} />
   }
   return icon
 }
@@ -104,7 +99,7 @@ export default class SiderMenu extends PureComponent {
                 <span>{item.name}</span>
               </span>
             ) : item.name
-          }
+            }
           key={item.key || item.path}
         >
           {this.getNavMenuItems(item.children)}
@@ -112,9 +107,7 @@ export default class SiderMenu extends PureComponent {
       )
     } else {
       return (
-        <Menu.Item
-          key={item.key || item.path}
-        >
+        <Menu.Item key={item.key || item.path}>
           {this.getMenuItemPath(item)}
         </Menu.Item>
       )
@@ -167,7 +160,7 @@ export default class SiderMenu extends PureComponent {
     })
   }
   render() {
-    const { collapsed, location: { pathname }, onCollapse } = this.props
+    const { logo, collapsed, location: { pathname }, onCollapse } = this.props
     const { openKeys } = this.state
     // Don't show popup menu when it is been collapsed
     const menuProps = collapsed ? {} : {
@@ -188,13 +181,26 @@ export default class SiderMenu extends PureComponent {
         width={256}
         className={styles.sider}
       >
+        <div
+          className={styles.logo}
+          key='logo'
+        >
+          <Link to='/'>
+            <img
+              src={logo}
+              alt='logo'
+            />
+            <h1>管理后台</h1>
+          </Link>
+        </div>
         <Menu
           key='Menu'
+          theme='dark'
           mode='inline'
           {...menuProps}
           onOpenChange={this.handleOpenChange}
           selectedKeys={selectedKeys}
-          className={styles.menu}
+          style={{ padding: '16px 0', width: '100%' }}
         >
           {this.getNavMenuItems(this.menus)}
         </Menu>

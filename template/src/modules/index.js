@@ -1,81 +1,158 @@
 import React, { Component } from 'react'
-import { Layout, Spin } from 'antd'
-import { JcHeader } from '../components/styleComponents/index'
+import { Layout, Icon, Spin, message } from 'antd'
 import { Route } from 'react-router-dom'
-import { connect } from 'react-redux'
 import YXBreadcrunb from '../components/Breadcrumb'
-import { userLogout } from './login/reduck'
+import style from './style.less'
+import { connect } from 'react-redux'
 import storage from '../utils/storage.js'
+const { Content } = Layout
+import GlobalFooter from './layout/GlobalFooter'
+import GlobalHeader from './layout/GlobalHeader'
+import logo from '../assets/images/logo.png'
 import SiderMenu from '../components/SiderMenu'
 import { getMenuData } from '../global/menu'
-
-const { Content } = Layout
+import moment from 'moment'
 
 class MainLayout extends Component {
   constructor(props) {
     super(props)
+    this.orderTimeFrom = moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+    this.orderTimeTo = moment(Date.parse(new Date()) + 5 * 60 * 1000).format('YYYY-MM-DD HH:mm:ss')
     this.state = {
       collapsed: false,
       dealDialogVisible: false,
     }
   }
 
-  logout = () => {
-    this.props.dispatch(userLogout())
+  componentDidMount() {
+    let fiveMin = 3 * 60 * 1000
+    setInterval(() => {
+      this.props.dispatch(action.getNewTakeoutOrder({
+        currentPage: 1,
+        status: '15',
+        orderTimeFrom: this.orderTimeFrom,
+        orderTimeTo: this.orderTimeTo,
+      })).then(res => {
+        this.orderTimeFrom = this.orderTimeTo
+        this.orderTimeTo = moment(Date.parse(new Date(this.orderTimeTo)) + 3 * 60 * 1000).format('YYYY-MM-DD HH:mm:ss')
+      })
+    }, fiveMin)
+  }
+
+  handleMenuCollapse = () => {
+    this.setState({
+      collapsed: !this.state.collapsed,
+    })
+  }
+
+  handleNoticeClear = (type) => {
+    message.success(`清空了${type}`)
+  }
+
+  handleMenuClick = ({ key }) => {
+    if (key === 'logout') {
+      this.logout()
+    }
+  }
+  handleNoticeVisibleChange = (visible) => {
+    if (visible) {
+      message.success(`NoticeVisible`)
+    }
   }
 
   render() {
     let MainContent = this.props.content
     const { showSpin } = this.props
     let userInfo = storage.get('user')
-    let currentShop = storage.get('currentShop') || this.state.currentShop
 
     return (
-      <Layout style={{ minHeight: '100%' }}>
-        <JcHeader
-          currentUser={userInfo}
-          currentShop={currentShop || []}
-          dispatch={this.props.dispatch}
-          match={this.props.match}
+      <Layout className={style.layout}>
+        <SiderMenu
+          logo={logo}
+          // 不带Authorized参数的情况下如果没有权限,会强制跳到403界面
+          menuData={getMenuData()}
+          collapsed={this.state.collapsed}
+          location={location}
+          isMobile={false}
+          onCollapse={this.handleMenuCollapse}
         />
         <Layout>
-          <SiderMenu
-            // 不带Authorized参数的情况下如果没有权限,会强制跳到403界面
-            menuData={getMenuData()}
+          <GlobalHeader
+            logo={logo}
+            currentUser={userInfo}
+            fetchingNotices={true}
+            notices={[]}
             collapsed={this.state.collapsed}
-            location={location}
             isMobile={false}
+            onNoticeClear={this.handleNoticeClear}
             onCollapse={this.handleMenuCollapse}
+            onMenuClick={this.handleMenuClick}
+            onNoticeVisibleChange={this.handleNoticeVisibleChange}
           />
-
-          <Content style={{ padding: 24 }}>
+          <div style={{ padding: '0 24px 24px' }}>
             <Route
               render={({ location, match }) => {
-                return (<YXBreadcrunb
-                  location={location}
-                  match={match}
-                  routes={this.props.routes}
-                        />)
+                return (
+                  <YXBreadcrunb
+                    location={location}
+                    match={match}
+                    routes={this.props.routes}
+                  />)
               }}
             />
-            <Spin
-              spinning={showSpin.bool}
-              tip={showSpin.content}
-            >
+            <Content style={{ minHeight: 600 }}>
               <MainContent {...this.props} />
-            </Spin>
-          </Content>
+            </Content>
+          </div>
+          <GlobalFooter
+            links={[]}
+            copyright={
+              <div>
+                Copyright <Icon type='copyright' /> 2017 金诚集团
+              </div>
+            }
+          />
         </Layout>
+        {
+          showSpin && showSpin.bool && (
+            <div className={style.cover}>
+              <Spin
+                tip={showSpin.content}
+                style={{ marginTop: 160, marginLeft: -160 }}
+                size='large'
+              />
+            </div>
+          )
+        }
       </Layout>
     )
   }
-}
 
-const mapStateToProps = state => {
-  return {
-    userInfo: state.userLogin,
-    showSpin: state.common.showSpin
+  logout = () => {
+    storage.clear()
+  }
+
+  close = () => {
+    this.setState({
+      dealDialogVisible: false
+    })
+  }
+
+  deal = () => {
+    this.props.match.history.push('/app/order/takeout')
   }
 }
 
-export default connect(mapStateToProps)(MainLayout)
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.userLogin,
+    showSpin: state.common.showSpin,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  dispatch
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainLayout)
+

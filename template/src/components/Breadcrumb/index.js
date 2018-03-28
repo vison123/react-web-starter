@@ -2,7 +2,7 @@ import { Breadcrumb } from 'antd'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 // import React from 'react'
-import style from './style.css'
+import style from './style.less'
 // import createBreadcrunb from './Breadcrumbs'
 
 // const staticRoutesMap = {

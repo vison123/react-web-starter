@@ -1,16 +1,12 @@
 let baseUrl = '/'
-let imgPrefix = 'http://dx-image-test.itangchao.me/'
-let videoPrefix = 'http://dx-video-test.itangchao.me/'
+let imgPrefix = 'https://mallimg.jcease.com/'
+let qiniuUpload = 'http://upload.qiniu.com'
 /*eslint-disable */
 if (process.env.NODE_ENV === 'production') {
   baseUrl = 'http://wapi.mall.jcease.com'
-  imgPrefix = 'https://image.youxiangtv.com/'
-  videoPrefix = 'https://video.youxiangtv.com/'
   if (TEST) {
     console.log('in TEST')
     baseUrl = 'http://test.wapi.mall.jcease.com'
-    imgPrefix = 'http://dx-image-test.itangchao.me/'
-    videoPrefix = 'http://dx-video-test.itangchao.me/'
   }
   if (PRE) {
     console.log('in PRE')
@@ -24,4 +20,4 @@ if (process.env.NODE_ENV === 'production') {
   }
 }
 
-export { baseUrl, imgPrefix, videoPrefix }
+export { baseUrl, imgPrefix, qiniuUpload }

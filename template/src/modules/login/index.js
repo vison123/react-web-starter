@@ -5,7 +5,7 @@ import loginName from 'images/login/user.png'
 import passWord from 'images/login/password.png'
 import logo from 'images/login/logo.png'
 import bottomImg from 'images/login/bottom.jpg'
-import style from './index.css'
+import style from './index.less'
 import { userLoginAct } from './reduck'
 import storage from '../../utils/storage'
 

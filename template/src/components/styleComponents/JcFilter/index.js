@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Form, Button, Input, Select, DatePicker, Row, Col } from 'antd'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import ClassifyTree from 'components/classifytree'
+import ClassifyTree from '../../../components/classifytree'
 import './index.less'
 
 const RangePicker = DatePicker.RangePicker
@@ -33,6 +33,7 @@ class JcFilter extends Component {
       rules: formItem.rules
     })(
       <Select
+        allowClear={true}
         style={{ width: '100%' }}
         showSearch={formItem.showSearch || false}
         placeholder={'请选择' + formItem.label}
@@ -58,7 +59,7 @@ class JcFilter extends Component {
     return getFieldDecorator(formItem.fieldName, { rules: formItem.rules })(
       <RangePicker
         style={{ width: '100%' }}
-        format={'YYYY-MM-DD HH:mm:ss'}
+        format={formItem.format || 'YYYY-MM-DD HH:mm:ss'}
         placeholder={['开始日期', '结束日期']}
         showTime={{
           hideDisabledOptions: false
@@ -72,6 +73,7 @@ class JcFilter extends Component {
       <ClassifyTree
         allowClear={false}
         isTreeSelect={true}
+        value={formItem.initialValue}
         treeData={formItem.treeData}
         onSelect={formItem.onSelect}
       />
@@ -118,6 +120,7 @@ class JcFilter extends Component {
                 key={index}
                 type={button.btnType || 'default'}
                 onClick={() => button.onClick(this.props.form.getFieldsValue())}
+                disabled={button.btnDisabled}
               >
                 {button.desc}
               </Button>

@@ -12,7 +12,6 @@ const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const path = require('path');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
-const theme = require('../package.json').theme;
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -188,7 +187,7 @@ module.exports = {
           // directory for faster rebuilds.
           cacheDirectory: true,
           plugins: [
-            ['import', [{ libraryName: 'antd', style: true }]],
+            ['import', [{ libraryName: 'antd', style: 'css' }]],
           ],
         },
       },
@@ -205,7 +204,6 @@ module.exports = {
             loader: require.resolve('css-loader'),
             options: {
               importLoaders: 1,
-              modules: true,
             },
           },
           {
@@ -239,7 +237,7 @@ module.exports = {
             loader: require.resolve('css-loader'),
             options: {
               sourceMap: true,
-              // modules: true,
+              modules: true,
               localIdentName: '[name]_[local]_[hash:base64:8]',
               importLoaders: 2,
             },
@@ -262,12 +260,7 @@ module.exports = {
               ],
             },
           },
-          {
-            loader: require.resolve('less-loader'),
-            options: {
-              modifyVars: theme
-            },
-          },
+          require.resolve('less-loader'),
         ],
       },
       // ** STOP ** Are you adding a new loader?
@@ -306,7 +299,7 @@ module.exports = {
     // solution that requires the user to opt into importing specific locales.
     // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
     // You can remove this if you don't use Moment.js:
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new StyleLintPlugin({
       files: ['src/**/*.css','src/**/*.less']
     })

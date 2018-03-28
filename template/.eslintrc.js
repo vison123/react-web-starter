@@ -108,7 +108,6 @@ module.exports = {
     'no-this-before-super': 2, // super()前不能用this
     'no-throw-literal': 2, // 禁止直接throw内容，必须是Error()
     'no-trailing-spaces': [2, { 'skipBlankLines': true }], // 禁止多余的空格, 允许空行
-    'no-undef': 2, // 禁止使用未赋值变量
     'no-undef-init': 2, // 变量不能初始化为undefined
     'no-unexpected-multiline': 2, // 禁止有疑义的多行表达式
     'no-unmodified-loop-condition': 2, // 循环中的变量要在循环中修改

@@ -13,7 +13,6 @@ const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
-const theme = require('../package.json').theme;
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -219,7 +218,7 @@ const config = {
                     importLoaders: 1,
                     minimize: true,
                     sourceMap: true,
-                    modules: true,
+                    // modules: true,
                     // localIdentName: '[name]__[local]--[hash:base64:5]'
                   },
                 },
@@ -265,7 +264,7 @@ const config = {
                     importLoaders: 2,
                     minimize: true,
                     sourceMap: true,
-                    // modules: true,
+                    modules: true,
                     localIdentName: '[name]_[local]_[hash:base64:8]',
                   },
                 },
@@ -287,12 +286,7 @@ const config = {
                     ],
                   },
                 },
-                {
-                  loader: require.resolve('less-loader'),
-                  options: {
-                    modifyVars: theme
-                  },
-                },
+                require.resolve('less-loader'),
               ],
             },
             extractTextPluginOptions

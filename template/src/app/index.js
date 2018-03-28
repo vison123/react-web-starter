@@ -13,11 +13,13 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import * as urls from '../global/routepath'
 import Layout from '../modules'
 import Login from '../modules/login'
-// import storage from '../utils/storage.js'
 import routes from '../global/routes'
 import checkPermission from '../global/checkPermission'
-
+import moment from 'moment'
 import '../assets/styles/index.less'
+import 'moment/locale/zh-cn'
+
+moment.locale('zh-cn')
 
 const middlewares = [thunkMiddleware, promiseMiddleware]
 
@@ -32,19 +34,6 @@ const store = createStore(
 )
 
 const verifyUser = (match, route) => {
-  // let user = storage.get('user')
-  // if (user && user.accessToken) {
-  //   return (
-  //     <Layout
-  //       routes={routes}
-  //       match={match}
-  //       content={checkPermission(route)}
-  //       path={route.path}
-  //     />
-  //   )
-  // } else {
-  //   return (<Redirect to={urls.LOGIN} />)
-  // }
   return (
     <Layout
       routes={routes}

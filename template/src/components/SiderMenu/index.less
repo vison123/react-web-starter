@@ -1,3 +1,5 @@
+@import "~antd/lib/style/themes/default.less";
+@ease-in-out-circ: cubic-bezier(0.78, 0.14, 0.15, 0.86);
 
 .logo {
   height: 64px;
@@ -5,7 +7,7 @@
   line-height: 64px;
   padding-left: (@menu-collapsed-width - 32px) / 2;
   transition: all 0.3s;
-  background: #FFF;
+  background: #002140;
   overflow: hidden;
   img {
     display: inline-block;
@@ -24,16 +26,10 @@
 }
 
 .sider {
-  background: #FFF;
   min-height: 100vh;
+  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
   position: relative;
   z-index: 10;
-}
-
-.menu {
-  padding: 16px 0;
-  width: 100%;
-  height: calc(100vh - 65px);
 }
 
 .icon {
