@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Button, Input, Select, DatePicker, Row, Card, Col, Radio, Table, Upload, Modal, Icon, Checkbox } from 'antd'
-import styles from './style.css'
+import styles from './style.less'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import ClassifyTree from 'components/classifytree'

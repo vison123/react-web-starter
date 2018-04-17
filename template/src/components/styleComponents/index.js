@@ -13,7 +13,8 @@ import JcExpandItem from './JcExpandItem'
 
 const UpLoadBtn = ({ type = 'picture' }) => (
   <div>
-    <Icon type={type} style={{ fontSize: 36, color: '#E8E8E8' }} />
+    <Icon type='plus' style={{ fontSize: 24 }} />
+    <div className='ant-upload-text'>图片上传</div>
   </div>
 )
 

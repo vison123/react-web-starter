@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Modal, Form, Input, Button, message } from 'antd'
-import styles from './ModalForm.css'
+import styles from './ModalForm.less'
 
 const defaultFormItemLayout = {
   labelCol: { span: 6 },

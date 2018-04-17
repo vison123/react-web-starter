@@ -1,3 +1,4 @@
+@import '~antd/lib/style/themes/default.less';
 
 .descriptionList {
   :global {
@@ -22,12 +23,12 @@
     white-space: nowrap;
     display: table-cell;
 
-    &::after {
-      content: ":";
-      margin: 0 8px 0 2px;
-      position: relative;
-      top: -0.5px;
-    }
+    // &::after {
+    //   content: ":";
+    //   margin: 0 8px 0 2px;
+    //   position: relative;
+    //   top: -0.5px;
+    // }
   }
 
   .detail {
@@ -36,6 +37,8 @@
     padding-bottom: 16px;
     color: @text-color;
     display: table-cell;
+    word-wrap: break-word;
+    word-break: break-all;
   }
 
   &.small {

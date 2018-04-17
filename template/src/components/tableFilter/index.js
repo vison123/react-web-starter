@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Button, Input, Select, DatePicker, Row, Col } from 'antd'
-import styles from './index.css'
+import styles from './index.less'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import ClassifyTree from 'components/classifytree'

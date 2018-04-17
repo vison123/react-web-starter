@@ -1,30 +1,35 @@
-.jc-filter {
-  margin-bottom: 16px;
-  .ant-form-item {
-    margin-bottom: 24px;
-    margin-right: 0;
-    display: flex;
-    > .ant-form-item-label {
-      text-align: left;
-      width: 70px;
-      line-height: 32px;
-      padding-right: 8px;
-    }
+:global {
+  .jc-filter {
+    // margin-bottom: 16px;
     .ant-form-item-control {
-      line-height: 32px;
+      line-height: inherit;
     }
-  }
-  .ant-select:only-child,
-  .ant-cascader-picker:only-child {
-    top: 0;
-  }
-  .ant-form-item-control-wrapper {
-    flex: 1;
-  }
-  .jc-filter-btn {
-    margin-bottom: 24px;
-    vertical-align: top;
-    display: inline-block;
-    white-space: nowrap;
+    .ant-form-item {
+      margin-bottom: 24px;
+      margin-right: 0;
+      display: flex;
+      > .ant-form-item-label {
+        text-align: left;
+        width: 70px;
+        line-height: 32px;
+        padding-right: 8px;
+      }
+      .ant-form-item-control {
+        line-height: 32px;
+      }
+    }
+    .ant-select:only-child,
+    .ant-cascader-picker:only-child {
+      top: 0;
+    }
+    .ant-form-item-control-wrapper {
+      flex: 1;
+    }
+    .jc-filter-btn {
+      margin-bottom: 24px;
+      vertical-align: top;
+      display: inline-block;
+      white-space: nowrap;
+    }
   }
 }

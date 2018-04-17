@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Layout, Menu, Icon } from 'antd'
+import { Layout, Menu } from 'antd'
 import { Link } from 'react-router-dom'
 import styles from './index.less'
 import storage from '../../utils/storage'
@@ -10,7 +10,7 @@ const { SubMenu } = Menu
 // Allow menu.js config icon as string or ReactNode
 //   icon: 'setting',
 //   icon: 'http://demo.com/icon.png',
-//   icon: <Icon type="setting" />,
+//   icon: <Icon type='setting' />,
 const getIcon = (icon) => {
   if (typeof icon === 'string' && icon.indexOf('http') === 0) {
     return (
@@ -22,7 +22,12 @@ const getIcon = (icon) => {
     )
   }
   if (typeof icon === 'string') {
-    return <Icon type={icon} />
+    return (
+      <span
+        className={`iconfont ${icon}`}
+        style={{ marginRight: '30px' }}
+      />
+    )
   }
   return icon
 }
@@ -32,7 +37,7 @@ export default class SiderMenu extends PureComponent {
     super(props)
     this.menus = props.menuData
     this.state = {
-      openKeys: storage.get('openKeys')
+      openKeys: storage.get('openKeys') || []
     }
   }
   getFlatMenuKeys(menus) {
@@ -49,8 +54,11 @@ export default class SiderMenu extends PureComponent {
   }
   getSelectedMenuKeys = (path) => {
     const flatMenuKeys = this.getFlatMenuKeys(this.menus)
-    if (flatMenuKeys.filter(item => item.indexOf(path) > -1).length > 0) {
-      return [path]
+    const menu = flatMenuKeys.filter(item => path.startsWith(item))
+    if (menu.length === 1) {
+      return menu
+    } else if (menu.length > 1) {
+      return menu.filter(item => item !== '/')
     }
     return []
   }
@@ -160,7 +168,7 @@ export default class SiderMenu extends PureComponent {
     })
   }
   render() {
-    const { logo, collapsed, location: { pathname }, onCollapse } = this.props
+    const { logo, title, collapsed, location: { pathname }, onCollapse } = this.props
     const { openKeys } = this.state
     // Don't show popup menu when it is been collapsed
     const menuProps = collapsed ? {} : {
@@ -190,7 +198,7 @@ export default class SiderMenu extends PureComponent {
               src={logo}
               alt='logo'
             />
-            <h1>管理后台</h1>
+            <h1>{title}</h1>
           </Link>
         </div>
         <Menu

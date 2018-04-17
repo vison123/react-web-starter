@@ -1,4 +1,3 @@
-
 /** Used to check objects for own properties. */
 // const hasOwnProperty = Object.prototype.hasOwnProperty;
 
@@ -20,8 +19,8 @@ function isEmpty(value) {
   return false
 }
 
-export {
-  isObject,
-  isArray,
-  isEmpty,
+function isString(value) {
+  return Object.prototype.toString.call(value) === '[object String]'
 }
+
+export { isObject, isArray, isEmpty, isString }

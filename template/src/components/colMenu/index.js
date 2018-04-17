@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Menu, Row, Col, Layout } from 'antd'
 import storage from '../../utils/storage'
-import styles from './index.css'
+import styles from './index.less'
 import { Link } from 'react-router-dom'
 
 const { Sider } = Layout

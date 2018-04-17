@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styles from './style.css'
+import styles from './style.less'
 
 class Title extends Component {
   render () {

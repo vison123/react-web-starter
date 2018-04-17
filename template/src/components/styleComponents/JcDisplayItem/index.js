@@ -1,7 +1,9 @@
 import React from 'react'
 import classNames from 'classnames'
 import { Tooltip, Form } from 'antd'
+import { isString } from '../../../utils/lang'
 import './index.less'
+import { isNumber } from 'util'
 
 const FormItem = Form.Item
 
@@ -15,7 +17,6 @@ class JcDisplayItem extends React.PureComponent {
     text: '',
     extra: '',
     style: {},
-    border: false,
     maxLength: 30,
     extraClass: '',
     labelClass: '',
@@ -40,35 +41,29 @@ class JcDisplayItem extends React.PureComponent {
     )
     const renderText = () => {
       if (text) {
-        return (
-          <div className='item-text' style={{ textAlign }}>
-            {text.toString().length < maxLength
-              ? (
-                <span>
-                  {text}
-                </span>
-              )
-              : (
+        if (isString(text) || isNumber(text)) {
+          return (
+            <div className='item-text' style={{ textAlign }}>
+              {text.toString().length < maxLength ? (
+                <span>{text}</span>
+              ) : (
                 <Tooltip placement='topLeft' title={text}>
-                  <span style={{ cursor: 'pointer' }}>
-                    {text && text.toString().substring(0, maxLength)}...
-                  </span>
+                  <span style={{ cursor: 'pointer' }}>{text && text.toString().substring(0, maxLength)}...</span>
                 </Tooltip>
               )}
-          </div>
-        )
+            </div>
+          )
+        } else {
+          return text
+        }
       } else {
         return ''
       }
     }
-    // todo 通过className来控制label部分的颜色
     return (
       <FormItem className={Class} style={{ style }} {...this.props}>
         {mode === 'view' && renderText()}
-        {mode === 'edit' &&
-          <div style={{ marginLeft: 8 }}>
-            {children}
-          </div>}
+        {mode === 'edit' && <div style={{ marginLeft: 8 }}>{children}</div>}
       </FormItem>
     )
   }

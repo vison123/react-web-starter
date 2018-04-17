@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import { Row } from 'antd'
-import styles from './index.css'
+import styles from './index.less'
 
 export default ({ className, title, col = 3, layout = 'horizontal', gutter = 32,
   children, size, ...restProps }) => {

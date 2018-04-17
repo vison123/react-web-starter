@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Button, Input, Select, DatePicker, Row, Col } from 'antd'
+import { Form, Button, Input, Select, DatePicker, Row, Col, TreeSelect } from 'antd'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import ClassifyTree from '../../../components/classifytree'
@@ -8,18 +8,22 @@ import './index.less'
 const RangePicker = DatePicker.RangePicker
 const Option = Select.Option
 const FormItem = Form.Item
+const TreeNode = TreeSelect.TreeNode
 
 class JcFilter extends Component {
+
   _renderInput = formItem => {
     const { getFieldDecorator } = this.props.form
     return getFieldDecorator(formItem.fieldName, {
       initialValue: formItem.initialValue || '',
       rules: formItem.rules
-    })(<Input
-      style={{ width: '100%' }}
-      placeholder={'请输入' + formItem.label}
-      autoComplete={'off'}
-       />)
+    })(
+      <Input
+        style={{ width: '100%' }}
+        placeholder={'请输入' + formItem.label}
+        autoComplete={'off'}
+      />
+      )
   }
 
   _filterOption = (input, option) => {
@@ -40,18 +44,65 @@ class JcFilter extends Component {
         getPopupContainer={() => document.getElementById('form')}
         filterOption={this._filterOption}
       >
-        {formItem.dictionary && formItem.dictionary.map(dictItem => {
+        {formItem.dictionary && Object.keys(formItem.dictionary).map(key => {
           return (
             <Option
-              key={dictItem.key}
-              value={dictItem.key}
+              key={key}
+              value={key}
             >
-              {dictItem.value}
+              {formItem.dictionary[key]}
             </Option>
           )
         })}
       </Select>
     )
+  }
+
+  _renderTreeSelect = formItem => {
+    const { getFieldDecorator } = this.props.form
+    return getFieldDecorator(formItem.fieldName, {
+      initialValue: formItem.initialValue || undefined,
+      rules: formItem.rules
+    })(
+      <TreeSelect
+        showSearch={false}
+        allowClear
+        dropdownStyle={{ maxHeight: 200, overflow: 'auto' }}
+        getPopupContainer={() => document.getElementById('form')}
+        placeholder={'请选择' + formItem.label}
+        treeDefaultExpandAll
+      >
+        {this._loopTree(formItem.treeData)}
+      </TreeSelect>
+    )
+  }
+
+  _loopTree =(treeData) => {
+    if (!treeData || treeData.length === 0) {
+      return
+    }
+    return treeData.map((item, index) => {
+      if (item.children && item.children.length > 0) {
+        return (
+          <TreeNode
+            title={item.categoryName}
+            value={item.categoryId}
+            key={`${item.categoryId}-${index}`}
+            disabled={!item.categoryId}
+          >
+            {this._loopTree(item.children)}
+          </TreeNode>
+        )
+      } else {
+        return (
+          <TreeNode
+            title={item.categoryName}
+            value={item.categoryId}
+            key={item.categoryId}
+          />
+        )
+      }
+    })
   }
 
   _renderRangePicker = formItem => {
@@ -99,6 +150,8 @@ class JcFilter extends Component {
                   return this._renderRangePicker(formItem)
                 case 'ClassifyTree':
                   return this._renderClassifyTree(formItem)
+                case 'TreeSelect':
+                  return this._renderTreeSelect(formItem)
                 default:
                   return <p>暂不支持</p>
               }
@@ -149,10 +202,7 @@ class JcFilter extends Component {
     const { fields, buttons } = this.props
     return (
       <div className='jc-filter'>
-        <Form
-          id='form'
-          layout='inline'
-        >
+        <Form id='form' layout='inline'>
           <Row
             gutter={{ md: 8, lg: 24, xl: 48 }}
             type='flex'

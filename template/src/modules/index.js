@@ -24,21 +24,6 @@ class MainLayout extends Component {
     }
   }
 
-  componentDidMount() {
-    let fiveMin = 3 * 60 * 1000
-    setInterval(() => {
-      this.props.dispatch(action.getNewTakeoutOrder({
-        currentPage: 1,
-        status: '15',
-        orderTimeFrom: this.orderTimeFrom,
-        orderTimeTo: this.orderTimeTo,
-      })).then(res => {
-        this.orderTimeFrom = this.orderTimeTo
-        this.orderTimeTo = moment(Date.parse(new Date(this.orderTimeTo)) + 3 * 60 * 1000).format('YYYY-MM-DD HH:mm:ss')
-      })
-    }, fiveMin)
-  }
-
   handleMenuCollapse = () => {
     this.setState({
       collapsed: !this.state.collapsed,
@@ -69,6 +54,7 @@ class MainLayout extends Component {
       <Layout className={style.layout}>
         <SiderMenu
           logo={logo}
+          title={'管理后台'}
           // 不带Authorized参数的情况下如果没有权限,会强制跳到403界面
           menuData={getMenuData()}
           collapsed={this.state.collapsed}
@@ -130,16 +116,6 @@ class MainLayout extends Component {
 
   logout = () => {
     storage.clear()
-  }
-
-  close = () => {
-    this.setState({
-      dealDialogVisible: false
-    })
-  }
-
-  deal = () => {
-    this.props.match.history.push('/app/order/takeout')
   }
 }
 

@@ -1,7 +1,38 @@
+/* eslint-disable */
 import moment from 'moment'
 
 export function fixedZero(val) {
   return val * 1 < 10 ? `0${val}` : val
+}
+
+export function getDataFromTree(treedata, categoryId) {
+  let name = null
+
+  for (let i = 0; i < treedata.length; i++) {
+    const node = treedata[i]
+    if (treedata[i].categoryId === categoryId) {
+      name = node.categoryName
+      break
+    } else {
+      if (node.children && !name) {
+        name = getDataFromTree(treedata[i].children, categoryId)
+      }
+    }
+  }
+  return name
+}
+
+export function getValuesFromDic(dic, keys) {
+  if (dic && keys) {
+    if (keys.length >= 0) {
+      const resList = keys.map(key => {
+        return dic[key]
+      })
+      return resList.join('、')
+    }
+    return ''
+  }
+  return ''
 }
 
 export function getTimeDistance(type) {

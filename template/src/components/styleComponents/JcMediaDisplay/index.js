@@ -1,5 +1,11 @@
 import React from 'react'
 import { isArray } from '../../../utils/lang'
+import { showModalWrapper } from '../../modal/ModalWrapper'
+
+function handlePreview(file) {
+  const html = <img alt='preview' style={{ width: '100%' }} src={file.url} />
+  showModalWrapper(html)
+}
 
 const JcMedia = ({ url, onPreview }) => {
   const preview = e => {
@@ -8,7 +14,7 @@ const JcMedia = ({ url, onPreview }) => {
   }
   return (
     <div className='ant-upload-list ant-upload-list-picture-card'>
-      <div className='ant-upload-list-item ant-upload-list-item-undefined'>
+      <div className='ant-upload-list-item ant-upload-list-item-undefined' style={{ marginTop: 8 }}>
         <div className='ant-upload-list-item-info'>
           <span>
             <a className='ant-upload-list-item-thumbnail' href={url} target='_blank' rel='noopener noreferrer'>
@@ -27,31 +33,23 @@ const JcMedia = ({ url, onPreview }) => {
   )
 }
 
-const JcMediaDisplay = ({ medias, onPreview }) => {
+const JcMediaDisplay = ({ medias, onPreview = handlePreview }) => {
   const renderMedias = () => {
     if (medias) {
       if (isArray(medias) && medias.length > 0) {
         return medias.map((item, index) => {
-          return (
-            <JcMedia key={index} url={item} onPreview={url => onPreview({ url })} />
-          )
+          return <JcMedia key={index} url={item} onPreview={url => onPreview({ url })} />
         })
       } else if (medias.length > 0) {
-        return (
-          <JcMedia url={medias} onPreview={url => onPreview({ url })} />
-        )
+        return <JcMedia url={medias} onPreview={url => onPreview({ url })} />
       } else {
-        return <p>暂无数据</p>
+        return <p />
       }
     } else {
-      return <p>暂无数据</p>
+      return <p />
     }
   }
-  return (
-    <div>
-      {renderMedias()}
-    </div>
-  )
+  return <div>{renderMedias()}</div>
 }
 
 export default JcMediaDisplay
