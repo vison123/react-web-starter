@@ -25,7 +25,7 @@ const getIcon = (icon) => {
     return (
       <span
         className={`iconfont ${icon}`}
-        style={{ marginRight: '30px' }}
+        style={{ marginRight: '35px' }}
       />
     )
   }
